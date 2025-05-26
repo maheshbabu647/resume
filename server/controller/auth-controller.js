@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 
 import userModel from '../model/user-model.js'
-import sendVerificationMail from '../../../task-manager/server/service/email-verfication-service.js'
+import sendVerificationMail from '../service/email-verification-service.js'
 import { createToken } from '../util/jwt.js'
 import { createAuthCookie, clearAuthCookie } from '../util/auth-cookie.js'
 
