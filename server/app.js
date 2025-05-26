@@ -18,7 +18,7 @@ app.use(cookieParser(COOKIE_SECRET))
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
-
+app.get('/health', (req, res) => {res.status(200).send('<h1>The Server is healthy</h1>')})
 app.use('/api/', indexRouter)
 
 app.use(errorHandler)
