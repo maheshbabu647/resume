@@ -12,7 +12,8 @@ const createAuthCookie = async (res, authToken) => {
             secure : true,
             domain : SERVER_DOMAIN,
             Path : '/',
-            expires : expiryDate
+            expires : expiryDate,
+            sameSite : 'None'
         }
 
         res.cookie("authToken", authToken, cookie_options)
@@ -36,7 +37,8 @@ const clearAuthCookie = async (res) => {
             httpOnly : true,
             secure : true,
             domain : SERVER_DOMAIN,
-            Path : '/'
+            Path : '/',
+            sameSite :'None'
         }
 
         res.clearCookie('authToken', cookie_options)
