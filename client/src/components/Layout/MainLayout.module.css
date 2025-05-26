@@ -1,0 +1,20 @@
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+.mainContent {
+    flex-grow: 1;
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-xl);
+}
+
+@media ( max-width: 768px) {
+    .mainContent {
+        padding-top: var(--spacing-md);
+        padding-bottom: var(--spacing-lg);
+    }
+}

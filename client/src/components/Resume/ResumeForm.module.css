@@ -1,0 +1,86 @@
+/* src/components/Resume/ResumeForm.module.css */
+
+.resumeForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg); /* Space between sections */
+}
+
+.formSection {
+  /* Optional: Add background/border if sections need visual separation
+  background-color: #fcfcfc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  */
+}
+
+.sectionTitle {
+  font-size: 1.3rem; /* Slightly larger for section titles */
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+  display: flex; /* For aligning title and potential actions like Add button */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  /* Input component usually handles its own bottom margin via .formGroup */
+}
+
+.inputRow > * { /* Direct children of inputRow */
+  flex: 1; /* Make inputs share space equally */
+  min-width: 200px; /* Ensure inputs don't get too squished */
+}
+
+/* Styling for repeatable groups */
+.repeatableSectionHeader { /* Use this if title and add button are grouped separately from items */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: var(--spacing-md); */ /* .sectionTitle already has margin-bottom */
+}
+
+.repeatableGroup {
+  /* This class can wrap the entire list of repeatable items if needed for extra styling */
+  /* margin-bottom: var(--spacing-md); */
+}
+
+.repeatableItem {
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color); /* Or a slightly different shade like #f9f9f9 */
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-md); /* Space between items and above the first item (if after title) */
+  border-radius: var(--border-radius);
+  position: relative; /* For absolute positioning of remove button if not in header */
+}
+.repeatableItem:first-of-type {
+    margin-top: var(--spacing-sm); /* Less margin if it's directly after the section title + add button */
+}
+
+
+.repeatableItemHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.repeatableItemHeader h4 { /* e.g., "Experience #1" */
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color-secondary);
+}
+
+/* Container for the "Add Item" button, usually at the end of a repeatable section */
+.addItemButtonContainer {
+  margin-top: var(--spacing-sm); /* Space above the add button */
+  /* text-align: left; */ /* Or right, depending on design */
+}

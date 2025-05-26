@@ -1,0 +1,110 @@
+/* theme variables */
+/*colors*/
+:root {
+
+  --primary-color: #007bff;
+  --primary-rgb: rgb(0, 123, 255);
+  
+  --primary-color-dark: #0056b3;
+  --primary-dark-rgb: rgb(0, 86, 179);
+  
+  --secondary-color: #6c757d;
+  --secondary-rgb: rgb(108, 117, 125);
+  
+  --success-color: #28a745;
+  --success-rgb: rgb(40, 167, 69);
+  
+  --danger-color: #dc3545;
+  --danger-rgb: rgb(220, 53, 69);
+  
+  --warning-color: #ffc107;
+  --warning-rgb: rgb(255, 193, 7);
+  
+  --info-color: #17a2b8;
+  --info-rgb: rgb(23, 162, 184);
+  
+  --light-color: #f8f9fa;
+  --light-rgb: rgb(248, 249, 250);
+  
+  --dark-color: #343a49;
+  --dark-rgb: rgb(52, 58, 73);
+  
+  --background-color: #fff;
+  --background-rgb: rgb(255, 255, 255);
+  
+  --surface-color: #fff;
+  --surface-rgb: rgb(255, 255, 255);
+  
+  --text-color: #212529;
+  --text-rgb: rgb(33, 37, 41);
+  
+  --text-color-muted: #6c757d;
+  --text-muted-rgb: rgb(108, 117, 125);
+  
+  --text-on-primary: #fff;
+  --text-on-primary-rgb: rgb(255, 255, 255);
+  
+  --text-on-dark: #fff;
+  --text-on-dark-rgb: rgb(255, 255, 255);
+  
+  --border-color: #dee2e6;
+  --border-rgb: rgb(222, 226, 230);
+  
+
+    /* Font */
+    --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --base-font-size: 16px;
+
+    /* Spacing */
+    --spacing-unit: 8px;
+    --spacing-xs: calc(var(--spacing-unit) * 0.5);  /* 4px */
+    --spacing-sm: var(--spacing-unit);             /* 8px */
+    --spacing-md: calc(var(--spacing-unit) * 2);   /* 16px */
+    --spacing-lg: calc(var(--spacing-unit) * 3);   /* 24px */
+    --spacing-xl: calc(var(--spacing-unit) * 4);   /* 32px */
+
+    /* Borders */
+    --border-radius-sm: 0.2rem;
+    --border-radius: 0.25rem;
+    --border-radius-lg: 0.3rem;
+
+    /* Shadows */
+    --box-shadow-sm: 0 .125rem .25rem rgba(0, 0, 0, .075);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+    --box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, .175);
+
+    /* Transitions */
+    --transition-base: all .2s ease-in-out;
+
+}
+
+/* --- Global Resets & Base Styles --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans-serif);
+  font-size: var(--base-font-size);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+a:hover {
+    color: var(--primary-color-dark);
+    text-decoration: underline;
+}

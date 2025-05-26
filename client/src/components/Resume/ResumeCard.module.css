@@ -1,0 +1,116 @@
+/* src/components/Resume/ResumeCard.module.css */
+
+.card {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-sm);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column; /* Stack image/placeholder and content */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  height: 100%; /* Important for consistent card heights in a grid */
+  overflow: hidden; /* Ensure content respects border radius */
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--box-shadow);
+}
+
+.imagePlaceholder {
+  width: 100%;
+  /* Using aspect-ratio for modern browsers. Adjust to match your template previews */
+  aspect-ratio: 4 / 3; /* More landscape, typical for a card preview */
+  /* Or a fixed height as an alternative: */
+  /* height: 180px; */
+  background-color: var(--light-color); /* Fallback if no image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Clip image */
+  border-bottom: 1px solid var(--border-color);
+}
+
+.resumeImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the area, may crop. 'contain' would show full image. */
+  display: block;
+  background-color: var(--secondary-color); /* Fallback bg for broken images */
+}
+
+.noImageText {
+  font-size: var(--font-size-sm);
+  color: var(--text-color-muted);
+}
+
+.cardContent {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Takes up remaining space in the card */
+}
+
+.resumeName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.3;
+  /* Truncate to 1 or 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: calc(2 * 1.3em); /* Approx height for 2 lines */
+}
+
+.templateInfo {
+  font-size: var(--font-size-sm);
+  color: var(--text-color-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.dateInfo {
+  font-size: var(--font-size-sm);
+  color: var(--text-color-muted);
+  margin-bottom: var(--spacing-md);
+  margin-top: auto; /* Pushes dates towards the actions if space allows */
+}
+
+.actions {
+  margin-top: auto; /* Pushes action buttons to the bottom of cardContent */
+  padding-top: var(--spacing-sm); /* Space above buttons */
+  /* border-top: 1px solid var(--border-color); */ /* Optional separator line */
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
+/* Specific styling for buttons within the card if needed, */
+/* otherwise they'll inherit from the Button component */
+.actions > * { /* Target Button components directly if they are Link wrapped */
+  /* Example: make buttons slightly smaller if needed */
+  /* padding: var(--spacing-xs) var(--spacing-sm); */
+  /* font-size: 0.85rem; */
+}
+
+@media (max-width: 576px) {
+  .resumeName {
+    font-size: 1rem;
+  }
+  .cardContent {
+    padding: var(--spacing-sm);
+  }
+  .actions {
+    flex-direction: column; /* Stack buttons on small screens */
+  }
+  .actions > * { /* Make stacked buttons full width */
+      width: 100%;
+  }
+  .imagePlaceholder {
+    aspect-ratio: 16 / 9; /* Adjust if needed for mobile */
+  }
+}

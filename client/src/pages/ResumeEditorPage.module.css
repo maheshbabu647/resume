@@ -1,0 +1,132 @@
+/* src/pages/ResumeEditorPage.module.css */
+
+/* Container for the entire editor page content */
+.editorPageContainer {
+  padding-top: var(--spacing-md); /* Add some top spacing below the navbar */
+  padding-bottom: var(--spacing-lg);
+  /* Horizontal padding is managed by the global '.container' class in MainLayout */
+}
+
+/* Main header for the page (e.g., "Create New Resume" or "Editing: My Resume") */
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pageHeader h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-color-headings);
+}
+/* The save/update button will be placed in .pageHeader by the JS component */
+
+/* Flex container for the two main panels (form and preview) */
+.editorLayout {
+  display: flex;
+  flex-direction: row; /* Side-by-side on larger screens */
+  gap: var(--spacing-lg); /* Space between the form and preview panels */
+}
+
+/* Panel for the resume input form */
+.formPanel {
+  flex: 1; /* Allows panel to grow, default basis is auto */
+  /* Or use a specific proportion like flex: 6; if preview is flex: 4; */
+  min-width: 320px; /* Minimum width before wrapping or squishing too much */
+  background-color: var(--surface-color);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-sm);
+  border: 1px solid var(--border-color);
+  overflow-y: auto; /* Allow internal scrolling if form is long */
+  /* Max height to encourage scrolling within the panel, relative to viewport height minus other elements */
+  max-height: calc(100vh - 150px); /* Adjust 150px based on your navbar height and page padding */
+}
+
+/* Panel for the live resume preview */
+.previewPanel {
+  flex: 1; /* Allows panel to grow */
+  /* Or use a specific proportion like flex: 4; if form is flex: 6; */
+  min-width: 320px;
+  background-color: var(--background-color); /* Can be same as page or slightly different */
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  overflow-y: auto; /* Allow internal scrolling if resume preview is long */
+  max-height: calc(100vh - 150px); /* Match form panel or adjust */
+
+  /* Sticky positioning for the preview panel on larger screens */
+  position: sticky;
+  top: calc(60px + var(--spacing-md)); /* Assuming navbar height is around 60px + desired gap */
+  /* Increase 60px if your navbar is taller */
+}
+
+/* Header within each panel (e.g., "Resume Details", "Live Preview") */
+.panelHeader { /* Changed from actionsHeader for clarity */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.panelHeader h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text-color-primary);
+}
+
+/* For centering loading spinners or error messages when the main content can't load */
+.loadingOrErrorContainer {
+  display: flex;
+  flex-direction: column; /* Stack spinner/message and button */
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* Give it some space */
+  width: 100%;
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+/* Inherit .errorMessage styles from ListPage.module.css if used globally, or define here */
+.errorMessage p {
+    color: var(--danger-color);
+    margin-bottom: var(--spacing-md);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) { /* Tablets and below */
+  .editorLayout {
+    flex-direction: column; /* Stack form and preview vertically */
+  }
+
+  .formPanel,
+  .previewPanel {
+    width: 100%;
+    max-height: none; /* Allow panels to take full height needed */
+    overflow-y: visible; /* Reset scrolling for stacked layout */
+  }
+
+  .previewPanel {
+    position: relative; /* Reset sticky positioning */
+    top: auto;
+    margin-top: var(--spacing-lg); /* Space between form and preview when stacked */
+  }
+}
+
+@media (max-width: 768px) { /* Smaller tablets / large phones */
+  .pageHeader h2 {
+    font-size: 1.5rem;
+  }
+  .formPanel, .previewPanel {
+    padding: var(--spacing-md);
+  }
+  .panelHeader h3 {
+    font-size: 1.15rem;
+  }
+}

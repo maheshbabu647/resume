@@ -1,0 +1,205 @@
+
+.navbar {
+    background-color: var(--surface-color);
+    box-shadow: var(--box-shadow-sm);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 1em;
+}
+
+
+.navContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.brand {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: var(--spacing-xs) 0;
+}
+.brand:hover {
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+.navLinksDesktop {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navLink{
+    color: var(--text-color-primary);
+    text-decoration: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2 ease-in-out, color 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.navLink:hover {
+    text-decoration: none;
+    color: var(--primary-color);
+    background-color: rgba(var(--primary-rgb, 13, 110, 253), 0.05);
+}
+
+.navLink.active {
+    color: var(--primary-color);
+    font-weight: bold;
+    background-color: rgba(var(--primary-color, 13, 110, 253), 0.1);
+}
+
+.authSectionDesktop {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.userInfo {
+    color: var(--text-color-primary);
+    font-size: 0.9em;
+    margin-right: var(--spacing-xs);
+}
+
+
+.menuToggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1002;
+    margin-right: calc(-1 * var(--spacing-sm));
+}
+
+.menuToggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.menuToggle span:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.menuToggle.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menuToggle.open span:nth-child(2) {
+    opacity: 0;
+}
+.menuToggle.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.mobileMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    padding-top: calc(60px + var(--spacing-lg));
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: var(--surface-color);
+    box-shadow: var(--box-shadow-lg);
+    transition: left 0.3s ease-in-out;
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+.mobileMenu.open{
+    left: 0;
+}
+
+.mobileMenuLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.mobileNavLink {
+    color: var(--text-color-primary);
+    text-decoration: none;
+    padding: var(--spacing-md) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: 1.1rem;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.mobileNavLink:hover{
+    color: var(--primary-color);
+    background-color: rgba(var(--primary-rgb, 13, 110, 253), 0.05);
+}
+
+.mobileNavLink.mobileActive {
+    color: var(--primary-color);
+    font-weight: bold;
+    background-color: rgba(var(--primary-rgb, 13, 110, 253), 0.1);
+}
+
+
+.mobileAuthSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.mobileUserInfo {
+    color: var(--text-color-secondary);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.fullWidthButton {
+    width: 80%;
+    max-width: 200px;
+}
+
+
+@media (max-width: 768px) {
+    .navLinksDesktop,
+    .authSectionDesktop {
+        display: none;
+    }
+
+    .menuToggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}

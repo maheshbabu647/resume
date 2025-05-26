@@ -1,0 +1,96 @@
+/* src/pages/ListPage.module.css */
+
+/* Container for the entire list page content, typically used inside MainLayout's container */
+.listPageContainer {
+  padding-top: var(--spacing-sm); /* Add some top spacing if needed, MainLayout already has some */
+  padding-bottom: var(--spacing-xl); /* Ample space at the bottom */
+}
+
+/* Header section of the list page (e.g., "Choose Your Template" title) */
+.listHeader {
+  display: flex;
+  justify-content: space-between; /* Pushes title to left, potential actions to right */
+  align-items: center; /* Vertically align items in the header */
+  margin-bottom: var(--spacing-lg); /* Space below the header */
+  padding-bottom: var(--spacing-md); /* Space below the title before the border */
+  border-bottom: 1px solid var(--border-color); /* Separator line */
+}
+
+.listHeader h2 {
+  margin: 0; /* Remove default h2 margin */
+  font-size: 1.8rem; /* Size for the main page title */
+  font-weight: 600; /* Semi-bold */
+  color: var(--text-color-headings); /* Use theme variable for heading color */
+}
+
+/* The grid container for displaying cards (e.g., TemplateCards) */
+.listGrid {
+  display: grid;
+  /*
+    Responsive grid configuration:
+    - `auto-fill`: Creates as many columns as can fit in the available space.
+    - `minmax(270px, 1fr)`: Each column will be at least 270px wide,
+      and at most, it will take up one fraction (1fr) of the available space,
+      allowing columns to grow equally. Adjust 270px based on your TemplateCard's desired minimum width.
+  */
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: var(--spacing-lg); /* Space between grid items (cards) */
+}
+
+/* For messages like "Loading...", "No items found...", or error messages that need centering */
+.centeredMessage {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-md); /* Ample padding around the message */
+  color: var(--text-color-muted); /* Use a muted text color */
+  font-size: 1.1rem;
+  width: 100%; /* Ensure it takes full width to properly center its content */
+}
+
+/* Specific styling for error messages, can be used with .centeredMessage */
+.errorMessage {
+  color: var(--danger-color); /* Use theme danger color */
+  /* Light danger background for better visibility */
+  background-color: rgba(var(--danger-rgb, 220, 53, 69), 0.05); /* Assumes --danger-rgb is defined */
+  border: 1px solid rgba(var(--danger-rgb, 220, 53, 69), 0.1);
+  padding: var(--spacing-md); /* Overrides .centeredMessage padding if both are used, or complements it */
+  border-radius: var(--border-radius);
+}
+
+/* Responsive adjustments for the list page layout */
+@media (max-width: 992px) { /* Medium devices (tablets, smaller desktops) */
+  .listGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Slightly smaller min card width */
+    gap: var(--spacing-md); /* Reduce gap */
+  }
+}
+
+@media (max-width: 768px) { /* Small devices (landscape phones, tablets) */
+  .listHeader h2 {
+    font-size: 1.6rem; /* Slightly smaller title */
+  }
+  .listPageContainer {
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 576px) { /* Extra small devices (portrait phones) */
+  .listHeader {
+    flex-direction: column; /* Stack title and any actions */
+    align-items: flex-start; /* Align title to the start */
+    gap: var(--spacing-sm); /* Space between title and actions if stacked */
+  }
+  .listHeader h2 {
+    font-size: 1.4rem;
+  }
+  .listGrid {
+    /* Optionally switch to a single column layout on very small screens */
+    /* grid-template-columns: 1fr; */
+    /* Or adjust minmax for even smaller cards */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  .centeredMessage {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    font-size: 1rem;
+  }
+}

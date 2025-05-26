@@ -1,0 +1,30 @@
+.previewContainer {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.resumeDocument {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+
+
+@media (max-width: 768px) {
+  .resumeDocument {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+}
