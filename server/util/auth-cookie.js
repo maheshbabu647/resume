@@ -10,8 +10,8 @@ const createAuthCookie = async (res, authToken) => {
         const cookie_options = {
             httpOnly : true,
             secure : true,
-            domain : SERVER_DOMAIN,
-            Path : '/',
+            // domain : SERVER_DOMAIN,
+            path : '/',
             expires : expiryDate,
             sameSite : 'None'
         }
