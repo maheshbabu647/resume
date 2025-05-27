@@ -36,8 +36,8 @@ const clearAuthCookie = async (res) => {
         const cookie_options = {
             httpOnly : true,
             secure : true,
-            domain : SERVER_DOMAIN,
-            Path : '/',
+            // domain : SERVER_DOMAIN,
+            path : '/',
             sameSite :'None'
         }
 
