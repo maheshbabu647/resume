@@ -16,6 +16,7 @@ import NotFoundPage from '../pages/NotFoundPage.jsx'
 
 import ProtectedRoute  from './ProtectedRoute.jsx'
 import ResumeViewerPage from '../pages/ResumeViewerPage.jsx'
+import HomePage from '@/pages/HomePage.jsx'
 
 const AppRouter = () => {
 
@@ -26,6 +27,8 @@ const AppRouter = () => {
                 <Route path = '/signup' element = {<SignupPage />} />
 
                 <Route element = {<MainLayout />}>
+                    
+                    <Route path='/home' element = {<HomePage />} />
                     
                     <Route element = {<ProtectedRoute roles = {['user', 'admin']}/>}>
                         <Route path = '/' element = {<ResumePage />} />
