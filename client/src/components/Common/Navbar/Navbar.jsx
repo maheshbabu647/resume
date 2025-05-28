@@ -176,7 +176,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Menu, X, LayoutTemplate, LayoutDashboard, FileUser, House, LogOut } from 'lucide-react'
+import { Menu, X, LayoutTemplate, User, FileUser, House, LogOut } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 import useAuthContext from '@/hooks/useAuth.js'
@@ -236,7 +236,7 @@ const Navbar = () => {
             <>
                 <NavLink to='/resumebuilder' className='hover:text-blue-500'><FileUser size={15} className='inline-block'/> Resume Builder</NavLink>
                 <NavLink to='/templates' className='hover:text-blue-500'><LayoutTemplate size={15} className='inline-block'/> Templates</NavLink>
-                <NavLink to='/dashboard' className='hover:text-blue-500'><LayoutDashboard size={15} className='inline-block' /> Dashboard</NavLink>
+                <NavLink to='/dashboard' className='hover:text-blue-500'><User size={15} className='inline-block' /> Dashboard</NavLink>
                 <Button class="px-4 py-2 rounded-md text-sm font-medium text-gray-700 bg-white/70 backdrop-blur-md shadow hover:bg-white/90 transition" onClick={handleLogout}><LogOut size={16}/></Button>
             </> :
             <>
@@ -283,7 +283,7 @@ const Navbar = () => {
                             <>
                                 <NavLink to='/resumebuilder' className='hover:text-blue-500'><FileUser size={15} className='inline-block'/> Resume Builder</NavLink>
                                 <NavLink to='/templates' className='hover:text-blue-500'><LayoutTemplate size={15} className='inline-block'/> Templates</NavLink>
-                                <NavLink to='/dashboard' className='hover:text-blue-500'><LayoutDashboard size={15} className='inline-block' /> Dashboard</NavLink>
+                                <NavLink to='/dashboard' className='hover:text-blue-500'><User size={15} className='inline-block' /> Dashboard</NavLink>
                                 <Button class="px-4 py-2 rounded-md text-sm font-medium text-gray-700 bg-white/70 backdrop-blur-md shadow hover:bg-white/90 transition" onClick={handleLogout}><LogOut /></Button>
                             </> :
                             <>

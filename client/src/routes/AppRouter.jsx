@@ -32,7 +32,7 @@ const AppRouter = () => {
                     
                     <Route element = {<ProtectedRoute roles = {['user', 'admin']}/>}>
                         <Route path = '/' element = {<ResumePage />} />
-                        <Route path = '/resumes' element = {<ResumePage />} />
+                        <Route path = '/dashboard' element = {<ResumePage />} />
                         <Route path = '/templates' element = {<TemplatesPage />} />
                         
                         <Route path = '/resume/new/:newResumeTemplateId' element = {<ResumeEditorPage mode = "create"/>} />

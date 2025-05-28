@@ -1,4 +1,5 @@
 import React, { forwardRef, useMemo } from "react";
+import { motion } from "framer-motion";
 
 import styles from './ResumePreview.module.css'
 
@@ -92,17 +93,33 @@ const ResumePreview = forwardRef(({ templateCode , currentFormData }, resumeRef)
     return generalPreviewHtml(templateCode, currentFormData)
   }, [templateCode, currentFormData])
 
+  // return (
+  //   <div className={styles.previewContainer}>
+  //     <div 
+  //       ref={resumeRef}
+  //       className={`${styles.resumeDocument} ${styles.fullHeightContent}`}
+  //       dangerouslySetInnerHTML={{ __html: previewHtmlContent}}
+  //       aria-live="polite"
+  //       aria-label="Resume Preview"
+  //     />
+  //   </div>
+  // )
+
   return (
-    <div className={styles.previewContainer}>
-      <div 
-        ref={resumeRef}
-        className={`${styles.resumeDocument} ${styles.fullHeightContent}`}
-        dangerouslySetInnerHTML={{ __html: previewHtmlContent}}
-        aria-live="polite"
-        aria-label="Resume Preview"
-      />
-    </div>
-  )
+  <div className="w-full h-full flex justify-center items-start p-4 bg-muted/40 rounded-xl border shadow-md">
+    <motion.div 
+      ref={resumeRef}
+      className="w-[794px] min-h-[1123px] bg-white shadow-lg rounded-md p-8 transition-all duration-300 ease-in-out overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      dangerouslySetInnerHTML={{ __html: previewHtmlContent }}
+      aria-live="polite"
+      aria-label="Resume Preview"
+    />
+  </div>
+);
+
 })
 
 export default ResumePreview
