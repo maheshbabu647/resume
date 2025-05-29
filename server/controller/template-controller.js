@@ -46,12 +46,11 @@ const createTemplate = async (req, res, next) => {
 
 
         if (templateFieldDefinition) {
-             try {
+            try {
                 parsedTemplateFieldDefinition = JSON.parse(templateFieldDefinition)
-
-            if (!Array.isArray(parsedTemplateFieldDefinition)) {
-                throw new Error('fieldDefinitions must be a valid JSON array.')
-            }
+                if (!Array.isArray(parsedTemplateFieldDefinition)) {
+                    throw new Error('fieldDefinitions must be a valid JSON array.')
+                }
             }
             catch(error) {
                 const err = new Error()

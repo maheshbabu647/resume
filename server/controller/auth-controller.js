@@ -5,6 +5,7 @@ import sendVerificationMail from '../service/email-verification-service.js'
 import { createToken } from '../util/jwt.js'
 import { createAuthCookie, clearAuthCookie } from '../util/auth-cookie.js'
 
+
 const userSignUp = async (req, res, next) => {
     try{
 

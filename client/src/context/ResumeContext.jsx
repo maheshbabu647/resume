@@ -76,7 +76,6 @@ const ResumeContextProvider = ({ children }) => {
 
         try {
             const data = await apiGetById(resumeId)
-            console.log(data)
             setCurrentResumeDetail(data)
             
             setEditorFormData(data?.resumeData && typeof data.resumeData === 'object' ? { ...data.resumeData } : {})

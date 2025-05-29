@@ -27,11 +27,11 @@ const HomePage = () => {
                 Create professional resumes with our advanced AI tools.
             </p>
             <div className='flex flex-col sm:flex-row gap-4 justify-center md:justify-start'>
-                <Button class="bg-blue-600 text-white px-6 py-2 rounded-md shadow-md hover:bg-blue-700 transition">
-                    Get Started →
+                <Button class="bg-blue-600 text-white px-6 py-2 rounded-md shadow-md hover:bg-blue-700 transition cursor-pointer">
+                    <NavLink to='/templates'>Get Started →</NavLink>
                 </Button>
-                <Button class="bg-white text-gray-700 px-6 py-2 rounded-md border border-gray-300 hover:shadow-md transition">
-                    View Templates
+                <Button class="bg-white text-gray-700 px-6 py-2 rounded-md border border-gray-300 hover:shadow-md transition cursor-pointer">
+                    <NavLink to='/templates'>View Templates</NavLink>
                 </Button>
             </div>
         </div>
@@ -92,8 +92,8 @@ const HomePage = () => {
         Get started with our AI-powered resume builder today and increase your chances of
         landing your dream job.
       </p>
-      <Button className="bg-white text-indigo-700 font-semibold px-6 py-3 hover:bg-gray-100 transition">
-        Create Your Resume →
+      <Button className="bg-white text-indigo-700 font-semibold px-6 py-3 hover:bg-gray-100 transition cursor-pointer">
+        <NavLink to='/templates'>Create Your Resume →</NavLink>
       </Button>
     </motion.section>
     </>

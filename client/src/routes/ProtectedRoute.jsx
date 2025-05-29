@@ -15,7 +15,7 @@ const ProtectedRoute = ({ roles }) => {
     }
 
     if ( !isAuthenticated ) {
-        return <Navigate to='/signin' state = {{ from : location }} replace />
+        return <Navigate to='/login' state = {{ from : location }} replace />
     }
 
     // if (roles && !roles.includes('user')) {

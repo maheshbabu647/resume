@@ -172,8 +172,8 @@ const AuthContextProvider = ({children}) => {
                 error : null
             })
             
-            if ( window.location.path !== '/signin' ) {
-                window.location.href = '/signin'
+            if ( window.location.path !== '/login' ) {
+                window.location.href = '/login'
             }
         } 
     }, [])

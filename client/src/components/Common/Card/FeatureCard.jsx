@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, MessageSquareText, Video } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const iconMap = {
     resume : <FileText className="w-8 h-8 text-blue-600" />,
@@ -38,8 +39,8 @@ const FeatureCard = (
                         {description}
                     </p>
                     {status === 'available' ? (
-                        <Button className="bg-blue-600 text-white hover:bg-blue-700">
-                            Get Started →
+                        <Button className="bg-blue-600 text-white hover:bg-blue-700 cursor-pointer">
+                            <NavLink to='/templates'>Get Started →</NavLink>
                         </Button>
                         ) : (
                         <Button disabled className="bg-blue-100 text-blue-600">
