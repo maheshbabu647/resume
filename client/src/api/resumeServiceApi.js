@@ -37,7 +37,8 @@ const downloadResume = async (resumeCode) => {
             {html: resumeCode},
             {responseType: 'blob',}
         )
-        
+        console.log("hii")
+
         const blob =  new Blob([response.data], { type: 'application/pdf'})
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -46,6 +47,7 @@ const downloadResume = async (resumeCode) => {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(link.href);
+        console.log("we are here")
 
     }
     catch(error) {
