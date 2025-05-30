@@ -38,7 +38,8 @@ const AppRouter = () => {
                         
                         <Route path = '/resume/new/:newResumeTemplateId' element = {<ResumeEditorPage mode = "create"/>} />
                         <Route path = '/resume/edit/:existingResumeId' element = {<ResumeEditorPage mode = "edit"/>} />
-                        <Route path = '/resume/view/:resumeId' element = {<ResumeViewerPage />} />
+                        <Route path = '/resume/saved/view/:resumeId' element = {<ResumeViewerPage />} />
+                        <Route path = '/resume/view/:templateId' element = {<ResumeViewerPage />} />
                     </Route>
 
                     <Route element = {<ProtectedRoute roles={['admin']} />} >

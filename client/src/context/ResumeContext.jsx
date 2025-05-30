@@ -26,6 +26,8 @@ const ResumeContextProvider = ({ children }) => {
     const [ isSavingResume, setIsSavingResume ] = useState(false)
     const [ isDeletingResume, setIsDeletingResume ] = useState(false)
 
+    const [ resumeElement, setResumeElement ] = useState(null)
+
     const [ resumeError, setResumeError ] = useState(null)
 
 

@@ -189,7 +189,6 @@ const ResumeForm = ({
   }
 
   const sections = templateFieldDefinition.reduce((acc, fieldDef) => {
-    console.log(fieldDef)
     const section = fieldDef.section || 'personal';
     if (!acc[section]) acc[section] = [];
     acc[section].push(fieldDef);
@@ -197,26 +196,19 @@ const ResumeForm = ({
   }, {});
 
 
-  const tabCategories = [
-    'personal',
-    'experience',
-    'education',
-    'skills',
-    'projects',
-    'certificates',
-  ];
-
+  const tabCategories = Object.keys(sections)
+  
   return (
     <div className="p-4">
       <Tabs defaultValue="personal" className="w-full">
-        <TabsList className="flex w-full border-b overflow-x-auto">
+        <TabsList className="flex w-full border-b flex flex-wrap gap-2">
           {tabCategories.map((category, index) => (
             <TabsTrigger
               key={`tab-${category}-${index}`}
               value={category}
-              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 whitespace-nowrap"
+              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600"
             >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
+              <p className='z-20 cursor-pointer'>{category.charAt(0).toUpperCase() + category.slice(1)}</p>
             </TabsTrigger>
           ))}
         </TabsList>
@@ -224,7 +216,7 @@ const ResumeForm = ({
         {tabCategories.map((category, sectionIndex) => (
           
           <TabsContent key={`content-${category}-${sectionIndex}`} value={category}>
-            <div className="mt-6 space-y-6">
+            <div className="mt-12 space-y-6">
               {sections[category]?.map((fieldDef, index) => {
                 const sectionKey = `${fieldDef.name}-${index}`;
 

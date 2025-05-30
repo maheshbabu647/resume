@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { FileText, Download, Edit, Trash } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
+import { downloadResume } from '@/api/resumeServiceApi';
 
 const ResumeCard = ({ resume, onDelete }) => {
   
@@ -35,6 +36,10 @@ const ResumeCard = ({ resume, onDelete }) => {
     navigate(`/resume/edit/${_id}`);
   };
 
+  const handlePreview = () => {
+    navigate(`/resume/saved/view/${_id}`)
+  }
+
   const handleDeleteClick = async () => {
     await onDelete(_id);
   };
@@ -61,7 +66,7 @@ const ResumeCard = ({ resume, onDelete }) => {
       </div>
       
       {/* Resume Preview Image */}
-      <div className="relative w-full h-140 bg-gray-100 rounded-md overflow-hidden">
+      <div className="relative w-full h-140 bg-gray-100 rounded-md overflow-hidden cursor-pointer" onClick={handlePreview}>
         <img
           src={templateImage}
           alt="Resume Preview"
@@ -80,7 +85,7 @@ const ResumeCard = ({ resume, onDelete }) => {
           Edit
         </Button>
         <Button variant="outline" className="flex-1 cursor-pointer">
-          <Download size={16} className="mr-2" />
+          <Download size={16} className="mr-2" onClick={downloadResume}/>
           Download
         </Button>
         <Button variant="outline" className="text-red-600 hover:text-red-700 cursor-pointer" onClick={handleDeleteClick}>

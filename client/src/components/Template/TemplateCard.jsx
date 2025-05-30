@@ -53,8 +53,11 @@ import { motion } from 'framer-motion';
 import { Eye } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const TemplateCard = ({ template }) => {
+
+  const navigate = useNavigate()
 
     if (!template) {
         return null

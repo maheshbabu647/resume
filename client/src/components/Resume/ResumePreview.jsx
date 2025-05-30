@@ -1,4 +1,3 @@
-// ResumePreview.jsx
 import React, { forwardRef, useMemo } from "react";
 import { motion } from "framer-motion";
 
@@ -84,24 +83,32 @@ const ResumePreview = forwardRef(({ templateCode, currentFormData }, resumeRef) 
     return processedCode;
   };
 
+
   const previewHtmlContent = useMemo(() => {
     return generalPreviewHtml(templateCode, currentFormData);
   }, [templateCode, currentFormData]);
 
   return (
-    <div className="w-full h-[calc(100vh-100px)] flex justify-center items-start p-4 bg-muted/40 rounded-xl border shadow-md overflow-hidden">
-      <motion.div
-        ref={resumeRef}
-        className="w-[794px] h-full bg-white shadow-lg rounded-md p-8 overflow-y-auto transition-all duration-300 ease-in-out"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        dangerouslySetInnerHTML={{ __html: previewHtmlContent }}
-        aria-live="polite"
-        aria-label="Resume Preview"
-      />
-    </div>
-  );
+<div className="w-full h-[calc(100vh-100px)] flex justify-center items-start bg-muted/40 rounded-xl border shadow-md overflow-auto">
+  <div className="scale-[0.6] origin-top transform">
+    <motion.div
+      ref={resumeRef}
+      className="bg-white shadow-lg rounded-md transition-all duration-300 ease-in-out"
+      style={{ width: '794px', height: '1123px' }} // keep A4 size
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      dangerouslySetInnerHTML={{ __html: previewHtmlContent }}
+      aria-live="polite"
+      aria-label="Resume Preview"
+    />
+  </div>
+</div>
+
+);
+
 });
 
 export default ResumePreview;
+
+

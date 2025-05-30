@@ -30,6 +30,30 @@ const getAllResumes = async () => {
     }
 }
 
+const downloadResume = async (resumeCode) => {
+    try {
+
+        const response = await apiServer.post('/resume/download',
+            {html: resumeCode},
+            {responseType: 'blob',}
+        )
+        
+        const blob =  new Blob([response.data], { type: 'application/pdf'})
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'My_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+
+    }
+    catch(error) {
+        console.error('Error downloading user resume: ', error.response?.data || error.message)
+        throw error.response?.data || { message : 'Failed to download your resume.'}
+    }
+}
+
 const getById = async (resumeId) => {
     try{
 
@@ -54,7 +78,7 @@ const updateResume = async (resumeId, resumePayLoad) => {
         if (!resumeId) {
             throw new Error('Resume ID is required to update a resume.')
         }
-        console.log("hey")
+
         const response = await apiServer.put(`/resume/update/${resumeId}`, resumePayLoad)
 
         return response.data.resume
@@ -88,5 +112,6 @@ export {createResume,
         getAllResumes,
         getById,
         updateResume,
-        deleteResume
+        deleteResume,
+        downloadResume
 }

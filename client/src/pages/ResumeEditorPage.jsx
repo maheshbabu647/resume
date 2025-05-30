@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { downloadResume } from "@/api/resumeServiceApi";
 
 // UI Components
 import { Button } from "@/components/ui/button";
@@ -75,7 +76,6 @@ const initializeFormDataFromDefinitions = (definitions) => {
 
 const ResumeEditorPage = () => {
   const { newResumeTemplateId, existingResumeId } = useParams();
-  console.log(newResumeTemplateId, existingResumeId)
   const navigate = useNavigate();
   
   const resumeRef = useRef();
@@ -291,47 +291,55 @@ const ResumeEditorPage = () => {
     }
   };
 
-  const handleDownload = async () => {
-    const resumeElement = resumeRef.current;
-    if (!resumeElement) {
-      alert('Error: Resume preview is not available. Please try again.'); // Fixed: Added user feedback
-      return;
-    }
+  // const handleDownload = async () => {
+  //   console.log(resumeRef.current)
+  //   console.log(resumeRef.current.outerHTML)
+  //   const resumeElement = resumeRef.current.outerHTML;
+  //   if (!resumeElement) {
+  //     alert('Error: Resume preview is not available. Please try again.'); // Fixed: Added user feedback
+  //     return;
+  //   }
 
-    try {
-      const canvas = await html2canvas(resumeElement, { scale: 3, useCORS: true });
-      const imgData = canvas.toDataURL('image/png');
+  //   try {
 
-      const imgProps = {
-        width: canvas.width,
-        height: canvas.height
-      };
+  //   const canvas = await html2canvas(resumeElement, { scale: 3, useCORS: true });
+  //   const imgData = canvas.toDataURL('image/png');
+  //     const imgProps = {
+  //       width: canvas.width,
+  //       height: canvas.height
+  //     };
 
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: 'a4',
-      });
+  //     const pdf = new jsPDF({
+  //       orientation: 'portrait',
+  //       unit: 'px',
+  //       format: 'a4',
+  //     });
 
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
+  //     const pageWidth = pdf.internal.pageSize.getWidth();
+  //     const pageHeight = pdf.internal.pageSize.getHeight();
 
-      const ratio = Math.min(pageWidth / imgProps.width, pageHeight / imgProps.height);
-      const imgWidth = imgProps.width * ratio;
-      const imgHeight = imgProps.height * ratio;
+  //     const ratio = Math.min(pageWidth / imgProps.width, pageHeight / imgProps.height);
+  //     const imgWidth = imgProps.width * ratio;
+  //     const imgHeight = imgProps.height * ratio;
 
-      const x = (pageWidth - imgWidth) / 2;
-      const y = 10;
+  //     const x = (pageWidth - imgWidth) / 2;
+  //     const y = 10;
 
-      pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+  //     pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
       
-      const fileName = currentResumeDetail?.resumeName || 'My_Resume';
-      pdf.save(`${fileName}.pdf`);
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Failed to download resume. Please try again.');
-    }
-  };
+  //     const fileName = currentResumeDetail?.resumeName || 'My_Resume';
+  //     pdf.save(`${fileName}.pdf`);
+  //   } catch (error) {
+  //     console.error('Error generating PDF:', error);
+  //     alert('Failed to download resume. Please try again.');
+  //   }
+  // };
+
+  const handleResumeDownload = () => {
+    const resumeElement = resumeRef.current.outerHTML //outerHtml thing might have something to do with html2canvas interuption for css
+    downloadResume(resumeElement)
+  }
+ 
 
   const templateCode = currentTemplateForEditor?.templateCode || '';
   const templateFieldDefinition = currentTemplateForEditor?.templateFieldDefinition || [];
@@ -427,6 +435,10 @@ const ResumeEditorPage = () => {
     );
   }
 
+  const handlePreview = async () =>  {
+    navigate(`/resume/view/${newResumeTemplateId ? newResumeTemplateId : existingResumeId}`)
+  }
+
   return (
     <>
       <div className="p-6 px-15 space-y-6 flex flex-col">
@@ -453,16 +465,17 @@ const ResumeEditorPage = () => {
           <div className="flex gap-2 self-center">
             <Button
               variant="outline"
-              className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white/70 backdrop-blur-md shadow hover:bg-white/90 transition"
+              className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white/70 backdrop-blur-md shadow hover:bg-white/90 transition cursor-pointer"
+              onClick={handlePreview}
             >
               <Eye className="w-4 h-4 mr-1" />
               Preview
             </Button>
             <Button
               variant="outline"
-              onClick={handleDownload}
+              onClick={handleResumeDownload}
               disabled={isSavingResume || isLoadingCurrentResume}
-              className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white/70 backdrop-blur-md shadow hover:bg-white/90 transition"
+              className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white/70 backdrop-blur-md shadow hover:bg-white/90 transition cursor-pointer"
             >
               <Download className="w-4 h-4 mr-1" />
               Download
@@ -470,7 +483,7 @@ const ResumeEditorPage = () => {
             <Button
               onClick={handleSaveResume}
               disabled={isSavingResume || isLoadingCurrentResume}
-              className="px-3 py-2 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition"
+              className="px-3 py-2 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition cursor-pointer"
             >
               {isSavingResume ? (
                 <>

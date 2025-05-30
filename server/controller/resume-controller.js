@@ -1,4 +1,5 @@
 import resumeModel from "../model/resume-model.js";
+import puppeteer from 'puppeteer'
 
 const createResume = async (req, res, next) => {
     
@@ -176,8 +177,41 @@ const deleteResume = async (req, res, next) => {
     }
 }
 
+const downlaodResume =  async (req, res, next) => {
+    
+    try {
+
+        const { html } = req.body
+        const browser = await puppeteer.launch()
+        const page= await browser.newPage()
+
+        await page.setContent(html, { waitUntil : 'networkidle0'})
+
+        const pdfBuffer = await page.pdf({
+            format: 'A4',
+            printBackground: true,
+        })
+
+        await browser.close()
+
+        res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="My_Resume.pdf"',
+        });
+
+        res.status(201).send(pdfBuffer)
+
+    }
+    catch(error) {
+
+        const err = new Error(error.message || 'Server error while downloading resume.')
+        err.status = error.status || 500
+    }
+}
+
 export { createResume,
          getResumeById,
          updateResume, 
          getAllResumes,
-         deleteResume }
+         deleteResume,
+        downlaodResume }
