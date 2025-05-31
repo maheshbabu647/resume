@@ -180,7 +180,6 @@ const deleteResume = async (req, res, next) => {
 const downlaodResume =  async (req, res, next) => {
     
     try {
-        console.log("d1")
         const { html } = req.body
         console.log('d2')
         const browser = await puppeteer.launch({
