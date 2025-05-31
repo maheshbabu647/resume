@@ -16,6 +16,7 @@
 !.gitattributes
 !.github
 !.gitignore
+!.dockerignore
 !.gitkeep
 !.gitpod.yml
 !.mailmap
