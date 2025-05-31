@@ -104,6 +104,18 @@ const ResumeEditorPage = () => {
   const [pageError, setPageError] = useState(null);
   const [currentTemplateForEditor, setCurrentTemplateForEditor] = useState(null);
   const [activeTab, setActiveTab] = useState("personal");
+  const [localStorageLoaded, setLocalStorageLoaded] = useState(true)
+
+
+  // useEffect(() => {
+  //   setLocalStorageLoaded(false)
+  //   const data = localStorage.getItem('draftForm')
+  //   console.log(data)
+  //   if (data) {
+  //     setEditorFormData(JSON.parse(data))
+  //   } 
+  //   setLocalStorageLoaded(true)
+  // },[localStorageLoaded])
 
   // Initialize editor based on URL parameters
   useEffect(() => {
@@ -121,7 +133,7 @@ const ResumeEditorPage = () => {
       if (isAuthenticated === null) {
         return;
       }
-
+      
       if (existingResumeId) {
         setMode('edit');
         try {
@@ -203,12 +215,14 @@ const ResumeEditorPage = () => {
     isLoadingTemplatesContext
   ]);
 
+
   // Propagate resumeError from context to pageError
   useEffect(() => {
     if (resumeError) {
       setPageError(resumeError);
     }
   }, [resumeError, setPageError]); // Fixed: Added setPageError to dependencies
+
 
   const handleSimpleChange = useCallback((fieldPath, value) => {
     setEditorFormData(prevData => {
@@ -225,6 +239,7 @@ const ResumeEditorPage = () => {
         }
       });
       
+      // localStorage.setItem("draftForm", JSON.stringify(newFormData))
       return newFormData;
     });
   }, [setEditorFormData]);
@@ -235,7 +250,9 @@ const ResumeEditorPage = () => {
       if (newArray[itemIndex]) {
         newArray[itemIndex] = { ...newArray[itemIndex], [fieldName]: value };
       }
-      return { ...prevData, [arrayPath]: newArray };
+      const newFormData = { ...prevData, [arrayPath]: newArray}
+      // localStorage.setItem('draftForm', JSON.stringify(newFormData))
+      return newFormData
     });
   }, [setEditorFormData]);
 
@@ -249,6 +266,7 @@ const ResumeEditorPage = () => {
       ...prevData,
       [arrayPath]: [...(prevData[arrayPath] || []), newItem],
     }));
+    // localStorage.setItem('draftForm', JSON.stringify(editorFormData))
   }, [setEditorFormData, currentTemplateForEditor]);
 
   const handleRemoveItemFromArray = useCallback((arrayPath, index) => {
@@ -257,6 +275,7 @@ const ResumeEditorPage = () => {
       if (index < 0 || index >= currentArray.length) return prevData;
       const newArray = [...currentArray];
       newArray.splice(index, 1);
+      // const newFormData = {...prevData, [arrayPath]: newArray}
       return { ...prevData, [arrayPath]: newArray };
     });
   }, [setEditorFormData]);
@@ -441,6 +460,7 @@ const ResumeEditorPage = () => {
 
   return (
     <>
+    {localStorageLoaded && 
       <div className="p-6 px-15 space-y-6 flex flex-col">
         {/* Title Section */}
         <motion.div
@@ -559,7 +579,9 @@ const ResumeEditorPage = () => {
           </motion.div>
         </div>
       </div>
+}
     </>
+      
   );
 };
 

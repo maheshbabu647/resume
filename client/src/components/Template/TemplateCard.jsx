@@ -109,7 +109,7 @@ const TemplateCard = ({ template }) => {
 
       {/* Use This Template Button */}
       <Link to={`/resume/new/${template._id}`}>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer" onClick={() => navigate(`resume/new/${template._id}`)}>
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer">
             Use This Template
             <span className="ml-2">→</span>
         </Button>

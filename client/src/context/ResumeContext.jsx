@@ -21,7 +21,7 @@ const ResumeContextProvider = ({ children }) => {
     const [ currentResumeDetail, setCurrentResumeDetail ] = useState(null)
     const [ isLoadingCurrentResume, setIsLoadingCurrentResume ]= useState(false)
 
-    const [ editorFormData, setEditorFormData ] = useState({})
+    const [ editorFormData, setEditorFormData ] = useState({} )
         
     const [ isSavingResume, setIsSavingResume ] = useState(false)
     const [ isDeletingResume, setIsDeletingResume ] = useState(false)

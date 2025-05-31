@@ -180,12 +180,16 @@ const deleteResume = async (req, res, next) => {
 const downlaodResume =  async (req, res, next) => {
     
     try {
-
+        console.log("d1")
         const { html } = req.body
+        console.log('d2')
         const browser = await puppeteer.launch()
+        console.log('d3')
         const page= await browser.newPage()
+        console.log('d4')
 
         await page.setContent(html, { waitUntil : 'networkidle0'})
+        console.log('d5')
 
         const pdfBuffer = await page.pdf({
             format: 'A4',
