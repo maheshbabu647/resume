@@ -105,6 +105,7 @@ const ResumeEditorPage = () => {
   const [currentTemplateForEditor, setCurrentTemplateForEditor] = useState(null);
   const [activeTab, setActiveTab] = useState("personal");
   const [localStorageLoaded, setLocalStorageLoaded] = useState(true)
+  const [downlaoding, setdownloading] = useState(false)
 
 
   // useEffect(() => {
@@ -354,9 +355,11 @@ const ResumeEditorPage = () => {
   //   }
   // };
 
-  const handleResumeDownload = () => {
+  const handleResumeDownload = async () => {
+    setdownloading(true)
     const resumeElement = resumeRef.current.outerHTML //outerHtml thing might have something to do with html2canvas interuption for css
-    downloadResume(resumeElement)
+    await downloadResume(resumeElement)
+    setdownloading(false)
   }
  
 
@@ -498,7 +501,7 @@ const ResumeEditorPage = () => {
               className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white/70 backdrop-blur-md shadow hover:bg-white/90 transition cursor-pointer"
             >
               <Download className="w-4 h-4 mr-1" />
-              Download
+              {downlaoding ? 'Downloading...' : 'Download'}
             </Button>
             <Button
               onClick={handleSaveResume}

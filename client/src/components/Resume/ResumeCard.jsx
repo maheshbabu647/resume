@@ -2,19 +2,31 @@ import { motion } from 'framer-motion';
 import { FileText, Download, Edit, Trash } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { downloadResume } from '@/api/resumeServiceApi';
+import { downloadResume, getById } from '@/api/resumeServiceApi';
+import resumeHtml from '@/utils/generateResumeHtml';
+import { useContext, useState } from 'react';
+import useTemplateContext from '@/hooks/useTemplate';
 
 const ResumeCard = ({ resume, onDelete }) => {
-  
+
+  const [ downlaoding , setdownloading ] = useState(false)
   const navigate = useNavigate()
+  
+  const {
+
+    templates
+    
+  } = useTemplateContext()
 
   const {
   _id,
   resumeName,
   templateId,
   updatedAt,
-  createdAt
+  createdAt,
+  resumeData
   } = resume;
+
 
   const displayName = resumeName || 'Resume (Untitled)';
   const templateImage = templateId?.templateImage || 'https://placehold.co/400x300/E0E0E0/B0B0B0?text=No+Preview';
@@ -43,6 +55,14 @@ const ResumeCard = ({ resume, onDelete }) => {
   const handleDeleteClick = async () => {
     await onDelete(_id);
   };
+
+  const handleDownload = async () => {
+    setdownloading(true)
+    const resume = await getById(_id)
+    const resumeElement = resumeHtml(resume.templateId.templateCode, resume.resumeData)
+    await downloadResume(resumeElement)
+    setdownloading(false)
+  } 
 
   return (
     <motion.div
@@ -84,9 +104,9 @@ const ResumeCard = ({ resume, onDelete }) => {
           <Edit size={16} className="mr-2" />
           Edit
         </Button>
-        <Button variant="outline" className="flex-1 cursor-pointer">
-          <Download size={16} className="mr-2" onClick={downloadResume}/>
-          Download
+        <Button variant="outline" className="flex-1 cursor-pointer" onClick={handleDownload}>
+          <Download size={16} className="mr-2"/>
+          {downlaoding ? 'Downloading...' : 'Download'}
         </Button>
         <Button variant="outline" className="text-red-600 hover:text-red-700 cursor-pointer" onClick={handleDeleteClick}>
           <Trash size={16} />
