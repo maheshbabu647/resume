@@ -183,7 +183,10 @@ const downlaodResume =  async (req, res, next) => {
         console.log("d1")
         const { html } = req.body
         console.log('d2')
-        const browser = await puppeteer.launch()
+        const browser = await puppeteer.launch({
+            headless: 'new', // Or true
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        })
         console.log('d3')
         const page= await browser.newPage()
         console.log('d4')
